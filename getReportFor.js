@@ -7,7 +7,7 @@ const getOption = function(user) {
     path: `/users/${user}/repos`,
     method: 'GET',
     headers: {
-      'Authorization': "manish12354",
+      // 'Authorization': "manish12354",
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
     }
   };
@@ -22,10 +22,15 @@ const callBack = function(res,user) {
   });
   res.on('end', () => {
     details = JSON.parse(userDetails);
-    let repos = details.map(element=>element.name)
-    userDetails = JSON.stringify(userDetails, null, 2);
-    console.log(`\n                   <<<=============== ${user} ===============>>>`);
-    repos.forEach((repo,index)=>console.log(`${index+1}. ${repo}`));
+    let isArray = Array.isArray(details);
+    if (isArray) {
+      let repos = details.map(element=>element.name)
+      userDetails = JSON.stringify(userDetails, null, 2);
+      console.log(`\n                   <<<=============== ${user} ===============>>>`);
+      repos.forEach((repo,index)=>console.log(`${index+1}. ${repo}`));
+    }else {
+      console.log(details);
+    }
   });
 }
 
