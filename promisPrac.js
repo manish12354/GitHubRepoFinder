@@ -53,7 +53,7 @@ const show = function(repos, header) {
   }
 }
 const showRepos = function(user) {
-  let header = `\n                   <<<=============== ${user} ===============>>>\n`;
+  let header = `\n${user} ====>\n`;
   sendHttpsReqFor(user)
     .then(getRepos)
     .then((repos) => show(repos, header))
